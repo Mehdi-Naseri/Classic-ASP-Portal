@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PortalAspModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PortalAspModelStoreContainer">
+    <EntitySet Name="Upload" EntityType="PortalAspModel.Store.Upload" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeblogComment" EntityType="PortalAspModel.Store.WeblogComment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WeblogPost" EntityType="PortalAspModel.Store.WeblogPost" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_WeblogComment_WeblogPost" Association="PortalAspModel.Store.FK_WeblogComment_WeblogPost">
+      <End Role="WeblogPost" EntitySet="WeblogPost" />
+      <End Role="WeblogComment" EntitySet="WeblogComment" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Upload">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UploadedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RandomName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UploadDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ContentLength" Type="int" Nullable="false" />
+    <Property Name="ContentType" Type="nchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="WeblogComment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="WeblogPostID" Type="int" Nullable="false" />
+    <Property Name="CommentDateTime" Type="datetime" Nullable="false" />
+    <Property Name="Writer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WeblogPost">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PostDateTime" Type="datetime" Nullable="false" />
+    <Property Name="Writer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostContent" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_WeblogComment_WeblogPost">
+    <End Role="WeblogPost" Type="PortalAspModel.Store.WeblogPost" Multiplicity="1" />
+    <End Role="WeblogComment" Type="PortalAspModel.Store.WeblogComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeblogPost">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WeblogComment">
+        <PropertyRef Name="WeblogPostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

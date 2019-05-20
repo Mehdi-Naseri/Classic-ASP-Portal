@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PortalAspModelStoreContainer" CdmEntityContainer="PortalAspEntities">
+    <EntitySetMapping Name="Uploads">
+      <EntityTypeMapping TypeName="PortalAspModel.Upload">
+        <MappingFragment StoreEntitySet="Upload">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="RandomName" ColumnName="RandomName" />
+          <ScalarProperty Name="UploadDateTime" ColumnName="UploadDateTime" />
+          <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeblogComments">
+      <EntityTypeMapping TypeName="PortalAspModel.WeblogComment">
+        <MappingFragment StoreEntitySet="WeblogComment">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="WeblogPostID" ColumnName="WeblogPostID" />
+          <ScalarProperty Name="CommentDateTime" ColumnName="CommentDateTime" />
+          <ScalarProperty Name="Writer" ColumnName="Writer" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WeblogPosts">
+      <EntityTypeMapping TypeName="PortalAspModel.WeblogPost">
+        <MappingFragment StoreEntitySet="WeblogPost">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PostDateTime" ColumnName="PostDateTime" />
+          <ScalarProperty Name="Writer" ColumnName="Writer" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="PostContent" ColumnName="PostContent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

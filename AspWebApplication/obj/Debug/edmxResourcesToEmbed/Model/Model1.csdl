@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PortalAspModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PortalAspEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Uploads" EntityType="PortalAspModel.Upload" />
+    <EntitySet Name="WeblogComments" EntityType="PortalAspModel.WeblogComment" />
+    <EntitySet Name="WeblogPosts" EntityType="PortalAspModel.WeblogPost" />
+    <AssociationSet Name="FK_WeblogComment_WeblogPost" Association="PortalAspModel.FK_WeblogComment_WeblogPost">
+      <End Role="WeblogPost" EntitySet="WeblogPosts" />
+      <End Role="WeblogComment" EntitySet="WeblogComments" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Upload">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="UploadedBy" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="FileName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="RandomName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="UploadDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ContentLength" Type="Int32" Nullable="false" />
+    <Property Name="ContentType" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="WeblogComment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="WeblogPostID" Type="Int32" Nullable="false" />
+    <Property Name="CommentDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Writer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="WeblogPost" Relationship="PortalAspModel.FK_WeblogComment_WeblogPost" FromRole="WeblogComment" ToRole="WeblogPost" />
+  </EntityType>
+  <EntityType Name="WeblogPost">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="PostDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Writer" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PostContent" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="WeblogComments" Relationship="PortalAspModel.FK_WeblogComment_WeblogPost" FromRole="WeblogPost" ToRole="WeblogComment" />
+  </EntityType>
+  <Association Name="FK_WeblogComment_WeblogPost">
+    <End Role="WeblogPost" Type="PortalAspModel.WeblogPost" Multiplicity="1" />
+    <End Role="WeblogComment" Type="PortalAspModel.WeblogComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeblogPost">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WeblogComment">
+        <PropertyRef Name="WeblogPostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
